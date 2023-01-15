@@ -1,25 +1,28 @@
-#######
-### Reworking data for first time in a long time
+# This is code to replicate the analysis and figures from (2023) "Termite Mound Impacts on Hydrology vary
+# with Herbaceous Vegetation and Topsoil Texture." This code was developed by Bri Lind.
 
-#  line plot of individual mounds/ ped/ mat sequence in filitration change
+# Last updated 01/12/2023
 
-# Set working directory
-setwd("C:/Users/brian/Desktop/FieldWork_KNPFall2019/DATA/")
-# Add Infiltration data
-Data.infil <- read.csv("Infiltration_ALL1.csv")
-Moist2 <- read.csv("Moist2.csv")
-setwd("C:/Users/brian/Desktop/FieldWork_KNPFall2019/")
-# Add data Compaction
-Data.comp <- read.csv("CompactionTests1.csv")
-Data.soilM <- read.csv("SoilMoisture.csv")
-
-# Add neccessary libraries
-if (!require(ggplot2)) install.packages('ggplot2') # installs package if not already installed
-library(ggplot2)                                   # loads package
-if (!require(dplyr)) install.packages('dplyr')
+# Requirements
+library(ggplot2)
 library(dplyr)
 library(tidyr)
 library(rstatix)
+
+# Load data (from desktop for now)
+  # Set working directory
+  setwd("C:/Users/brian/Desktop/FieldWork_KNPFall2019/DATA/")
+
+  # Add Infiltration data
+  Data.infil <- read.csv("Infiltration_ALL1.csv")
+  Moist2 <- read.csv("Moist2.csv")
+
+  # Add data Compaction
+  setwd("C:/Users/brian/Desktop/FieldWork_KNPFall2019/")
+  Data.comp <- read.csv("CompactionTests1.csv")
+  Data.soilM <- read.csv("SoilMoisture.csv")
+
+
 
 #Prepare Moisture Data
 # Plot the data
