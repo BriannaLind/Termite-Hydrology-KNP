@@ -1,0 +1,463 @@
+> summary(model.I1)
+
+Call:
+lm(formula = HC_mmh ~ psandMatrix + Vegetation, data = a_Mou)
+
+Residuals:
+    Min      1Q  Median      3Q     Max
+-27.146  -7.121  -2.615   3.086  64.140
+
+Coefficients:
+                 Estimate Std. Error t value Pr(>|t|)
+(Intercept)      -0.68422   13.12920  -0.052    0.959
+psandMatrix       0.06385    0.17279   0.370    0.713
+VegetationGrassy 25.43355    4.83252   5.263 2.23e-06 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 18.72 on 57 degrees of freedom
+Multiple R-squared:  0.328,	Adjusted R-squared:  0.3045
+F-statistic: 13.91 on 2 and 57 DF,  p-value: 1.2e-05
+
+> summary(model.I2)
+
+Call:
+lm(formula = HC_mmh ~ psandMatrix + Vegetation, data = b_Ped)
+
+Residuals:
+    Min      1Q  Median      3Q     Max
+-28.844 -14.344  -2.617   7.355  97.479
+
+Coefficients:
+                 Estimate Std. Error t value Pr(>|t|)
+(Intercept)      -14.1814    16.4949  -0.860 0.393534
+psandMatrix        0.3660     0.2171   1.686 0.097238 .
+VegetationGrassy  22.2262     6.0714   3.661 0.000551 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 23.51 on 57 degrees of freedom
+Multiple R-squared:  0.2215,	Adjusted R-squared:  0.1942
+F-statistic: 8.108 on 2 and 57 DF,  p-value: 0.0007967
+
+> summary(model.I3)
+
+Call:
+lm(formula = HC_mmh ~ psandMatrix + Vegetation, data = c_Mat)
+
+Residuals:
+   Min     1Q Median     3Q    Max
+-41.55 -22.80 -13.18  11.73 128.78
+
+Coefficients:
+                 Estimate Std. Error t value Pr(>|t|)
+(Intercept)      -41.5833    27.0322  -1.538  0.12951
+psandMatrix        1.0239     0.3558   2.878  0.00562 **
+VegetationGrassy  -0.1487     9.9498  -0.015  0.98813
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 38.54 on 57 degrees of freedom
+Multiple R-squared:  0.1269,	Adjusted R-squared:  0.09625
+F-statistic: 4.142 on 2 and 57 DF,  p-value: 0.02092
+
+> summary(model.I4)
+
+Call:
+lm(formula = HC_mmh ~ psandMatrix + Component, data = d_G)
+
+Residuals:
+    Min      1Q  Median      3Q     Max
+-37.485 -23.229  -5.222  15.957 102.384
+
+Coefficients:
+                  Estimate Std. Error t value Pr(>|t|)
+(Intercept)       -21.0429    17.3505  -1.213  0.22852
+psandMatrix         0.6886     0.2244   3.069  0.00288 **
+ComponentPediment   5.4453     7.8097   0.697  0.48753
+ComponentMatrix     3.8879     7.8097   0.498  0.61987
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 30.25 on 86 degrees of freedom
+Multiple R-squared:  0.1035,	Adjusted R-squared:  0.07226
+F-statistic: 3.311 on 3 and 86 DF,  p-value: 0.02384
+
+> summary(model.I5)
+
+Call:
+lm(formula = HC_mmh ~ psandMatrix + Component, data = e_B)
+
+Residuals:
+    Min      1Q  Median      3Q     Max
+-33.503 -11.754  -3.288   5.932 130.451
+
+Coefficients:
+                  Estimate Std. Error t value Pr(>|t|)
+(Intercept)        -15.586     15.812  -0.986    0.327
+psandMatrix          0.267      0.205   1.302    0.196
+ComponentPediment    8.673      6.907   1.256    0.213
+ComponentMatrix     29.534      6.907   4.276 4.91e-05 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 26.75 on 86 degrees of freedom
+Multiple R-squared:  0.1964,	Adjusted R-squared:  0.1684
+F-statistic: 7.006 on 3 and 86 DF,  p-value: 0.0002852
+
+> summary(model.M5)
+
+Call:
+lm(formula = AvgMoist ~ psandMatrix + Component, data = e_B)
+
+Residuals:
+    Min      1Q  Median      3Q     Max
+-4.6934 -1.8740 -0.5432  1.1845 12.0573
+
+Coefficients:
+                  Estimate Std. Error t value Pr(>|t|)
+(Intercept)       11.68845    1.67742   6.968 6.13e-10 ***
+psandMatrix       -0.11081    0.02175  -5.096 2.03e-06 ***
+ComponentPediment -0.15637    0.73273  -0.213   0.8315
+ComponentMatrix    1.65200    0.73273   2.255   0.0267 *
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 2.838 on 86 degrees of freedom
+Multiple R-squared:   0.28,	Adjusted R-squared:  0.2549
+F-statistic: 11.15 on 3 and 86 DF,  p-value: 2.977e-06
+
+> summary(model.M4)
+
+Call:
+lm(formula = AvgMoist ~ psandMatrix + Component, data = d_G)
+
+Residuals:
+    Min      1Q  Median      3Q     Max
+-5.9409 -2.9276 -0.7808  2.6460 11.1190
+
+Coefficients:
+                  Estimate Std. Error t value Pr(>|t|)
+(Intercept)       16.59287    2.19005   7.576 3.77e-11 ***
+psandMatrix       -0.15363    0.02832  -5.424 5.27e-07 ***
+ComponentPediment  0.00490    0.98577   0.005    0.996
+ComponentMatrix   -0.05890    0.98577  -0.060    0.952
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 3.818 on 86 degrees of freedom
+Multiple R-squared:  0.2549,	Adjusted R-squared:  0.2289
+F-statistic: 9.809 on 3 and 86 DF,  p-value: 1.243e-05
+
+> summary(model.M3)
+
+Call:
+lm(formula = AvgMoist ~ psandMatrix + Vegetation, data = c_Mat)
+
+Residuals:
+   Min     1Q Median     3Q    Max
+-5.077 -2.746 -1.132  2.498 11.420
+
+Coefficients:
+                 Estimate Std. Error t value Pr(>|t|)
+(Intercept)      18.33405    2.83016   6.478 2.34e-08 ***
+psandMatrix      -0.17887    0.03725  -4.802 1.18e-05 ***
+VegetationGrassy  0.05008    1.04171   0.048    0.962
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 4.035 on 57 degrees of freedom
+Multiple R-squared:  0.2881,	Adjusted R-squared:  0.2631
+F-statistic: 11.53 on 2 and 57 DF,  p-value: 6.223e-05
+
+> summary(model.M2)
+
+Call:
+lm(formula = AvgMoist ~ psandMatrix + Vegetation, data = b_Ped)
+
+Residuals:
+    Min      1Q  Median      3Q     Max
+-5.2845 -2.2627 -0.4908  0.5664 12.0220
+
+Coefficients:
+                 Estimate Std. Error t value Pr(>|t|)
+(Intercept)      12.41280    2.33116   5.325 1.78e-06 ***
+psandMatrix      -0.12281    0.03068  -4.003 0.000183 ***
+VegetationGrassy  1.92598    0.85804   2.245 0.028690 *
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 3.323 on 57 degrees of freedom
+Multiple R-squared:  0.2702,	Adjusted R-squared:  0.2446
+F-statistic: 10.55 on 2 and 57 DF,  p-value: 0.0001261
+
+> summary(model.M1)
+
+Call:
+lm(formula = AvgMoist ~ psandMatrix + Vegetation, data = a_Mou)
+
+Residuals:
+    Min      1Q  Median      3Q     Max
+-3.5434 -1.6658 -0.4882  1.2798  7.3787
+
+Coefficients:
+                 Estimate Std. Error t value Pr(>|t|)
+(Intercept)      10.67913    1.77247   6.025 1.31e-07 ***
+psandMatrix      -0.09705    0.02333  -4.161 0.000108 ***
+VegetationGrassy  1.76643    0.65240   2.708 0.008930 **
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 2.527 on 57 degrees of freedom
+Multiple R-squared:  0.3023,	Adjusted R-squared:  0.2778
+F-statistic: 12.35 on 2 and 57 DF,  p-value: 3.506e-05
+
+> summary(model.C1)
+
+Call:
+lm(formula = pclay ~ psandMatrix + Vegetation, data = a_Mou)
+
+Residuals:
+    Min      1Q  Median      3Q     Max
+-13.931  -3.588  -1.351   2.271  20.716
+
+Coefficients:
+                 Estimate Std. Error t value Pr(>|t|)
+(Intercept)      44.45640    4.89049   9.090 1.10e-12 ***
+psandMatrix      -0.39332    0.06436  -6.111 9.45e-08 ***
+VegetationGrassy -0.92622    1.80006  -0.515    0.609
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 6.972 on 57 degrees of freedom
+Multiple R-squared:  0.3974,	Adjusted R-squared:  0.3763
+F-statistic:  18.8 on 2 and 57 DF,  p-value: 5.371e-07
+
+> summary(model.C2)
+
+Call:
+lm(formula = pclay ~ psandMatrix + Vegetation, data = b_Ped)
+
+Residuals:
+     Min       1Q   Median       3Q      Max
+-12.6739  -4.4745   0.3829   3.8032  11.7829
+
+Coefficients:
+                 Estimate Std. Error t value Pr(>|t|)
+(Intercept)      42.84426    3.84391  11.146 6.07e-16 ***
+psandMatrix      -0.40406    0.05059  -7.987 7.22e-11 ***
+VegetationGrassy -1.92694    1.41484  -1.362    0.179
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 5.48 on 57 degrees of freedom
+Multiple R-squared:  0.5351,	Adjusted R-squared:  0.5188
+F-statistic:  32.8 on 2 and 57 DF,  p-value: 3.315e-10
+
+> summary(model.C3)
+
+Call:
+lm(formula = pclay ~ psandMatrix + Vegetation, data = c_Mat)
+
+Residuals:
+    Min      1Q  Median      3Q     Max
+-8.4514 -3.0887 -0.3472  2.0839 16.0599
+
+Coefficients:
+                 Estimate Std. Error t value Pr(>|t|)
+(Intercept)      42.36097    3.17262  13.352  < 2e-16 ***
+psandMatrix      -0.43609    0.04175 -10.444 7.46e-15 ***
+VegetationGrassy -0.09574    1.16776  -0.082    0.935
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 4.523 on 57 degrees of freedom
+Multiple R-squared:  0.6568,	Adjusted R-squared:  0.6448
+F-statistic: 54.54 on 2 and 57 DF,  p-value: 5.79e-14
+
+> summary(model.C4)
+
+Call:
+lm(formula = pclay ~ psandMatrix + Component, data = d_G)
+
+Residuals:
+     Min       1Q   Median       3Q      Max
+-13.6782  -3.0977  -0.0526   2.1023  15.7967
+
+Coefficients:
+                  Estimate Std. Error t value Pr(>|t|)
+(Intercept)       42.13652    3.17544  13.270  < 2e-16 ***
+psandMatrix       -0.37430    0.04107  -9.114 2.88e-14 ***
+ComponentPediment -3.40000    1.42931  -2.379  0.01958 *
+ComponentMatrix   -4.40000    1.42931  -3.078  0.00279 **
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 5.536 on 86 degrees of freedom
+Multiple R-squared:  0.5209,	Adjusted R-squared:  0.5041
+F-statistic: 31.16 on 3 and 86 DF,  p-value: 9.909e-14
+
+> summary(model.C5)
+
+Call:
+lm(formula = pclay ~ psandMatrix + Component, data = e_B)
+
+Residuals:
+     Min       1Q   Median       3Q      Max
+-12.6119  -3.9006  -0.1466   2.9909  20.1806
+
+Coefficients:
+                  Estimate Std. Error t value Pr(>|t|)
+(Intercept)       48.64915    3.47541  13.998  < 2e-16 ***
+psandMatrix       -0.45047    0.04505  -9.998 4.59e-16 ***
+ComponentPediment -2.40000    1.51813  -1.581 0.117573
+ComponentMatrix   -5.23333    1.51813  -3.447 0.000879 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 5.88 on 86 degrees of freedom
+Multiple R-squared:  0.5654,	Adjusted R-squared:  0.5502
+F-statistic: 37.29 on 3 and 86 DF,  p-value: 1.553e-15
+
+> summary(model.D5)
+
+Call:
+lm(formula = AvgDepth1S ~ psandMatrix + Component, data = e_B)
+
+Residuals:
+    Min      1Q  Median      3Q     Max
+-1.9734 -0.7366 -0.2016  0.3377  8.9421
+
+Coefficients:
+                  Estimate Std. Error t value Pr(>|t|)
+(Intercept)        0.28373    0.89600   0.317   0.7523
+psandMatrix        0.02112    0.01162   1.818   0.0725 .
+ComponentPediment -0.28333    0.39139  -0.724   0.4711
+ComponentMatrix    0.40000    0.39139   1.022   0.3096
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 1.516 on 86 degrees of freedom
+Multiple R-squared:  0.06911,	Adjusted R-squared:  0.03663
+F-statistic: 2.128 on 3 and 86 DF,  p-value: 0.1025
+
+> summary(model.D4)
+
+Call:
+lm(formula = AvgDepth1S ~ psandMatrix + Component, data = d_G)
+
+Residuals:
+    Min      1Q  Median      3Q     Max
+-1.9168 -0.4574 -0.1363  0.6253  3.2753
+
+Coefficients:
+                   Estimate Std. Error t value Pr(>|t|)
+(Intercept)        2.485834   0.542336   4.584 1.54e-05 ***
+psandMatrix        0.007697   0.007014   1.097  0.27557
+ComponentPediment -1.200000   0.244113  -4.916 4.19e-06 ***
+ComponentMatrix   -0.776667   0.244113  -3.182  0.00204 **
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.9454 on 86 degrees of freedom
+Multiple R-squared:  0.2326,	Adjusted R-squared:  0.2058
+F-statistic: 8.689 on 3 and 86 DF,  p-value: 4.242e-05
+
+> summary(model.D3)
+Error in summary(model.D3) : object 'model.D3' not found
+> # DEPTH AFTER 1 STRIKE
+>     model.D1 = lm (AvgDepth1S ~ psandMatrix + Vegetation, data = a_Mou)
+>       Anova(model.D1, type="II")
+Anova Table (Type II tests)
+
+Response: AvgDepth1S
+             Sum Sq Df F value  Pr(>F)
+psandMatrix   4.215  1  1.0395 0.31225
+Vegetation   22.250  1  5.4873 0.02267 *
+Residuals   231.127 57
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+>     model.D2 = lm (AvgDepth1S ~ psandMatrix + Vegetation, data = b_Ped)
+>       Anova(model.D2, type="II")
+Anova Table (Type II tests)
+
+Response: AvgDepth1S
+             Sum Sq Df F value  Pr(>F)
+psandMatrix  0.0301  1  0.0791 0.77960
+Vegetation   1.3510  1  3.5453 0.06482 .
+Residuals   21.7199 57
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+>     model.D3 = lm (AvgDepth1S ~ psandMatrix + Vegetation, data = c_Mat)
+>       Anova(model.D3, type="II")
+Anova Table (Type II tests)
+
+Response: AvgDepth1S
+             Sum Sq Df F value    Pr(>F)
+psandMatrix  5.6895  1 15.9161 0.0001911 ***
+Vegetation   0.0258  1  0.0722 0.7891922
+Residuals   20.3758 57
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+> summary(model.D3)
+
+Call:
+lm(formula = AvgDepth1S ~ psandMatrix + Vegetation, data = c_Mat)
+
+Residuals:
+     Min       1Q   Median       3Q      Max
+-1.09704 -0.43188 -0.02707  0.37771  1.53251
+
+Coefficients:
+                 Estimate Std. Error t value Pr(>|t|)
+(Intercept)       0.61776    0.41941   1.473 0.146275
+psandMatrix       0.02202    0.00552   3.989 0.000191 ***
+VegetationGrassy  0.04147    0.15437   0.269 0.789192
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.5979 on 57 degrees of freedom
+Multiple R-squared:  0.219,	Adjusted R-squared:  0.1916
+F-statistic: 7.992 on 2 and 57 DF,  p-value: 0.0008721
+
+> summary(model.D2)
+
+Call:
+lm(formula = AvgDepth1S ~ psandMatrix + Vegetation, data = b_Ped)
+
+Residuals:
+     Min       1Q   Median       3Q      Max
+-1.52538 -0.41311 -0.04621  0.41734  1.46501
+
+Coefficients:
+                 Estimate Std. Error t value Pr(>|t|)
+(Intercept)      1.432446   0.433024   3.308  0.00163 **
+psandMatrix      0.001602   0.005699   0.281  0.77960
+VegetationGrassy 0.300107   0.159385   1.883  0.06482 .
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.6173 on 57 degrees of freedom
+Multiple R-squared:  0.05975,	Adjusted R-squared:  0.02675
+F-statistic: 1.811 on 2 and 57 DF,  p-value: 0.1728
+
+> summary(model.D1)
+
+Call:
+lm(formula = AvgDepth1S ~ psandMatrix + Vegetation, data = a_Mou)
+
+Residuals:
+    Min      1Q  Median      3Q     Max
+-1.9591 -1.1202 -0.5906  0.7228  8.9651
+
+Coefficients:
+                 Estimate Std. Error t value Pr(>|t|)
+(Intercept)       0.44280    1.41256   0.313   0.7551
+psandMatrix       0.01895    0.01859   1.020   0.3123
+VegetationGrassy  1.21793    0.51993   2.342   0.0227 *
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 2.014 on 57 degrees of freedom
+Multiple R-squared:  0.1026,	Adjusted R-squared:  0.07109
+F-statistic: 3.258 on 2 and 57 DF,  p-value: 0.04575
