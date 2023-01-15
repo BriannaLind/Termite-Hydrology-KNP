@@ -8,9 +8,11 @@ library(ggplot2)
 library(dplyr)
 library(tidyr)
 library(rstatix)
+library(car)
 
+
+####### Data Integration #########################################################################
 # Integrate data from 3 separate collection sheets so can analyse together
-##################################################################################################
 # Load RAW DATA (from desktop for now)
   setwd("C:/Users/brian/Desktop/FieldWork_KNPFall2019/DATA/")
   Data.infil <- read.csv("Infiltration_ALL1.csv") # Infiltration data
@@ -62,12 +64,12 @@ library(rstatix)
   write.csv(Moist2, "Moist2.csv", row.names=FALSE)
 
 
-  # Work with Pre-processed data
 
-# Make plots/ Paper Figures
-##################################################################################################
 
-  # Load PRE-PROCESSED DATA
+
+####### Make Plots###########################################################################################
+  # Make plots/ Paper Figures  # Load PRE-PROCESSED DATA
+
   setwd("C:/Users/brian/Desktop/FieldWork_KNPFall2019/DATA/")
   Moist2 <- read.csv("Moist2.csv")
   head(Moist2)
@@ -106,129 +108,91 @@ library(rstatix)
           theme_bw()+ theme(text = element_text(size = 20), axis.title.y = element_blank(), legend.position = "top")
 
 
+        rm(go, go.l)
+
+
+####### Statistical Analyses ##########################################################################################
 # Perform Statistical Analyses
-##################################################################################################
+
+# Use ANCOVA for analysis - example here: https://www.datanovia.com/en/lessons/ancova-in-r/
+      # Want to compare means -  broadly similar assumption to ANOVA
+      # ANCOVAs: generally used to refine estimates of experimental error and adjust for treatment effects.
+      # there are 5 assumptions (Linearity, homogeneity of regression slopes, normality of residuals, homogeneity of variances, and no outliers).
 
 
+# Subset Data to strategically perform contrasts ANCOVAS
+      head(Moist2)
 
-# Separate into bare and grassy to facilitate contrasts
-Grass <- dplyr::filter(Moist2, Vegetation == "Grassy")
-Bare <- dplyr::filter(Moist2, Vegetation == "Bare")
+      # Preffered way
+      a_Mou <- dplyr::filter(Moist2, Component == "Mound")
+      b_Ped <- dplyr::filter(Moist2, Component == "Pediment")
+      c_Mat <- dplyr::filter(Moist2, Component == "Matrix")
 
-#Maybe do an ANCOVA  - who the F knows.
+# For each of my 4 response variables (Infiltration, Depth after 1 strike, Avg. Soil Moisture, % Clay)
+# Want to run an ANCOVA comparing grassy vs bare vegetation cover
 
+# INFILTRATION
+    model.I1 = lm (HC_mmh ~ psandMatrix + Vegetation, data = a_Mou)
+      Anova(model.I1, type="II")
+    model.I2 = lm (HC_mmh ~ psandMatrix + Vegetation, data = b_Ped)
+      Anova(model.I2, type="II")
+    model.I3 = lm (HC_mmh ~ psandMatrix + Vegetation, data = c_Mat)
+      Anova(model.I3, type="II")
 
+# MOISTURE
+    model.M1 = lm (AvgMoist ~ psandMatrix + Vegetation, data = a_Mou)
+      Anova(model.M1, type="II")
+    model.M2 = lm (AvgMoist ~ psandMatrix + Vegetation, data = b_Ped)
+      Anova(model.M2, type="II")
+    model.M3 = lm (AvgMoist ~ psandMatrix + Vegetation, data = c_Mat)
+      Anova(model.M3, type="II")
 
+# PERCENT CLAY
+    model.C1 = lm (pclay ~ psandMatrix + Vegetation, data = a_Mou)
+      Anova(model.C1, type="II")
+    model.C2 = lm (pclay ~ psandMatrix + Vegetation, data = b_Ped)
+      Anova(model.C2, type="II")
+    model.C3 = lm (pclay ~ psandMatrix + Vegetation, data = c_Mat)
+      Anova(model.C3, type="II")
 
-library(car)
-model.infil_1b = lm (HC_mmh ~ psandMatrix + Component, data = Bare)
-Anova(model.infil_1b, type="II") # signif difference between bare mound compoenents infil (ped==mound, matrix is diff)
-
-model.infil_1g = lm (HC_mmh ~ psandMatrix + Component, data = Grass)
-Anova(model.infil_1g, type="II") # no difference between grassy mound components in infiltration
-###########################
-# This deals with "within grass" or "within bare" contrasts but not BETWEEN
-Mound <- dplyr::filter(Moist2, Component == "Mound")
-Pedim <- dplyr::filter(Moist2, Component == "Pediment")
-
-model.infil_2m = lm (HC_mmh ~ psandMatrix + Vegetation, data = Mound)
-Anova(model.infil_2m, type="II") # signif difference between bare and grassy mound infil
-
-model.infil_2p = lm (HC_mmh ~ psandMatrix + Vegetation, data = Pedim)
-Anova(model.infil_2p, type="II") # signif difference between bare and grassy ped infil
-
-#######
-model.moist_1b = lm (AvgMoist ~ psandMatrix + Component, data = Bare)
-Anova(model.moist_1b, type="II")# signif difference between bare mound compoenents infil (ped==mound, matrix is diff)
-
-model.moist_2g = lm (AvgMoist ~ psandMatrix + Component, data = Grass)
-Anova(model.moist_2g, type="II")  # no difference between grassy mound components in moisture
-
-model.moist_2m = lm (AvgMoist ~ psandMatrix + Vegetation, data = Mound)
-Anova(model.moist_2m, type="II") # signif difference between bare and grassy mound moisture
-
-model.moist_2p = lm (AvgMoist ~ psandMatrix + Vegetation, data = Pedim)
-Anova(model.moist_2p, type="II") # signif difference between bare and grassy ped infil
-
-########
-model.pclay_1b = lm (pclay ~ psandMatrix + Component, data = Bare)
-Anova(model.pclay_1b, type="II")# mound has signif more clay than matrix
-
-model.pclay_2g = lm (pclay ~ psandMatrix + Component, data = Grass)
-Anova(model.pclay_2g, type="II")  # all different
-
-model.pclay_2m = lm (pclay ~ psandMatrix + Vegetation, data = Mound)
-Anova(model.pclay_2m, type="II") # NO signif difference between bare and grassy mound texture
-
-model.pclay_2p = lm (pclay ~ psandMatrix + Vegetation, data = Pedim)
-Anova(model.pclay_2p, type="II") # NO signif difference between bare and grassy ped texture
-
-
-
-########
-model.AD_1b = lm (AvgDepth1S ~ psandMatrix + Component, data = Bare)
-Anova(model.AD_1b, type="II")# mound has signif dd than than matrix
-
-model.AD_2g = lm (AvgDepth1S ~ psandMatrix + Component, data = Grass)
-Anova(model.AD_2g, type="II")  # all different
-
-model.AD_2m = lm (AvgDepth1S ~ psandMatrix + Vegetation, data = Mound)
-Anova(model.AD_2m, type="II") # NO signif difference between bare and grassy mound texture
-
-model.AD_2p = lm (AvgDepth1S ~ psandMatrix + Vegetation, data = Pedim)
-Anova(model.AD_2p, type="II") # NO signif difference between bare and grassy ped texture
+# DEPTH AFTER 1 STRIKE
+    model.D1 = lm (AvgDepth1S ~ psandMatrix + Vegetation, data = a_Mou)
+      Anova(model.D1, type="II")
+    model.D2 = lm (AvgDepth1S ~ psandMatrix + Vegetation, data = b_Ped)
+      Anova(model.D2, type="II")
+    model.D3 = lm (AvgDepth1S ~ psandMatrix + Vegetation, data = c_Mat)
+      Anova(model.D3, type="II")
 
 
 
 
+##### ALT STATS #############################################################################################
+      # Just to double check way
+      d_G   <- dplyr::filter(Moist2, Vegetation == "Grassy")
+      e_B   <- dplyr::filter(Moist2, Vegetation == "Bare")
+
+            # INFILTRATION
+            model.I4 = lm (HC_mmh ~ psandMatrix + Component, data = d_G)
+              Anova(model.I4, type="II")
+            model.I5 = lm (HC_mmh ~ psandMatrix + Component, data = e_B)
+              Anova(model.I5, type="II")
+
+            # MOISTURE
+            model.M4 = lm (AvgMoist ~ psandMatrix + Component, data = d_G)
+              Anova(model.M4, type="II")
+            model.M5 = lm (AvgMoist ~ psandMatrix + Component, data = e_B)
+              Anova(model.M5, type="II")
+
+            # PERCENT CLAY
+            model.C4 = lm (pclay ~ psandMatrix + Component, data = d_G)
+              Anova(model.C4, type="II")
+            model.C5 = lm (pclay ~ psandMatrix + Component, data = e_B)
+              Anova(model.C5, type="II")
+
+            # DEPTH AFTER 1 STRIKE
+            model.D4 = lm (AvgDepth1S ~ psandMatrix + Component, data = d_G)
+              Anova(model.D4, type="II")
+            model.D5 = lm (AvgDepth1S ~ psandMatrix + Component, data = e_B)
+              Anova(model.D5, type="II")
 
 
-
-model.infil_1b = lm (HC_mmh ~ psandMatrix + Component, data = Bare)
-Anova(model.infil_1b, type="II") # signif difference between bare mound compoenents infil (ped==mound, matrix is diff)
-
-model.infil_1g = lm (HC_mmh ~ psandMatrix + Component, data = Grass)
-Anova(model.infil_1g, type="II") # no difference between grassy mound components in infiltration
-###########################
-# This deals with "within grass" or "within bare" contrasts but not BETWEEN
-Mound <- dplyr::filter(Moist2, Component == "Mound")
-Pedim <- dplyr::filter(Moist2, Component == "Pediment")
-
-model.infil_2m = lm (HC_mmh ~ psandMatrix + Vegetation +psandMatrix:Vegetation, data = Moist2)
-plot(model.infil_2m, add.smooth = FALSE, which = 1)
-plot(model.infil_2m, which = 2)
-plot(model.infil_2m, add.smooth = FALSE, which = 3)
-anova(model.infil_2m) # signif difference between bare and grassy mound infil
-
-model.infil_2p = lm (HC_mmh ~ psandMatrix + Vegetation, data = Pedim)
-Anova(model.infil_2p, type="II") # signif difference between bare and grassy ped infil
-  anova(other)
-  plot(model.infil_2m, add.smooth = FALSE, which = 1)
-  plot(model.infil_2m, which = 2)
-  plot(model.infil_2m, add.smooth = FALSE, which = 3)
-
-  anova(model.infil_2m) # signif difference between bare and grassy mound infil
-
-
-
-
-
-yikes = lm (HC_mmh ~ psandMatrix + Vegetation + Component +psandMatrix:Vegetation +
-              psandMatrix:Component +  Component:Vegetation +
-              psandMatrix:Vegetation:Component, data = Moist2)
-
-
-yikes2 = lm (AvgMoist ~ psandMatrix + Vegetation + Component +psandMatrix:Vegetation +
-               psandMatrix:Component +  Component:Vegetation +
-               psandMatrix:Vegetation:Component, data = Moist2)
-
-yikes3 = lm (pclay ~ psandMatrix + Vegetation + Component +psandMatrix:Vegetation +
-               psandMatrix:Component +  Component:Vegetation +
-               psandMatrix:Vegetation:Component, data = Moist2)
-
-
-other  <- lm(formula = AvgDepth1S ~ psandMatrix + Vegetation + Component +
-               psandMatrix:Vegetation + psandMatrix:Component + Component:Vegetation +
-               psandMatrix:Vegetation:Component, data = Moist2)
-
-anova(yikes)
