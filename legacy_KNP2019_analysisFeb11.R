@@ -99,7 +99,7 @@ library(car)
         go.l <- gather(go, Stat, Value, HC_mmh:AvgDepth1S)
         go.l$Stat <- as.factor(go.l$Stat)
         levels(go.l$Stat) <- c("Avg. Depth Strike 1 (cm)", "Avg. % Soil Moisture", "Infiltration (mm/h)", "Soil % Clay")
-        go.l$Stat <- factor(go.l$Stat, levels =c( "Infiltration (mm/h)", "Avg. Depth Strike 3 (cm)", "Avg. % Soil Moisture", "Soil % Clay"))
+        go.l$Stat <- factor(go.l$Stat, levels =c( "Infiltration (mm/h)", "Avg. Depth Strike 1 (cm)", "Avg. % Soil Moisture", "Soil % Clay"))
         levels(go.l$Stat) <- c( "Infiltration (mm/h)", "Depth after 1 Strikes (cm)", "Avg. % Soil Moisture", "% Clay")
         go.l$Component <- factor(go.l$Component, levels = c("Mound", "Pediment", "Matrix"))
 
@@ -132,36 +132,78 @@ library(car)
 # Want to run an ANCOVA comparing grassy vs bare vegetation cover
 
 # INFILTRATION
-    model.I1 = lm (HC_mmh ~ psandMatrix + Vegetation, data = a_Mou)
-      Anova(model.I1, type="II")
-    model.I2 = lm (HC_mmh ~ psandMatrix + Vegetation, data = b_Ped)
-      Anova(model.I2, type="II")
-    model.I3 = lm (HC_mmh ~ psandMatrix + Vegetation, data = c_Mat)
-      Anova(model.I3, type="II")
+    model.I1a = lm (HC_mmh ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = a_Mou) # model 1
+    Anova(model.I1a, type="II")
+    model.I1b = lm (HC_mmh ~ psandMatrix + Vegetation,           data = a_Mou) # model 2
+      Anova(model.I1b, type="II")
+      summary(model.I1b)
+
+    model.I2a = lm (HC_mmh ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = b_Ped)
+    Anova(model.I2a, type="II")
+    model.I2b = lm (HC_mmh ~ psandMatrix + Vegetation,                          data = b_Ped)
+      Anova(model.I2b, type="II")
+      summary(model.I2b)
+
+    model.I3a = lm (HC_mmh ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = c_Mat)
+    Anova(model.I3a, type="II")
+    model.I3b = lm (HC_mmh ~ psandMatrix + Vegetation,                          data = c_Mat)
+     Anova(model.I3b, type="II")
+      summary(model.I3b)
 
 # MOISTURE
-    model.M1 = lm (AvgMoist ~ psandMatrix + Vegetation, data = a_Mou)
-      Anova(model.M1, type="II")
-    model.M2 = lm (AvgMoist ~ psandMatrix + Vegetation, data = b_Ped)
-      Anova(model.M2, type="II")
-    model.M3 = lm (AvgMoist ~ psandMatrix + Vegetation, data = c_Mat)
-      Anova(model.M3, type="II")
+    model.M1a = lm (AvgMoist ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = a_Mou)
+      Anova(model.M1a, type="II")
+      summary(model.M1a)
+
+    model.M2a = lm (AvgMoist ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = b_Ped)
+    Anova(model.M2a, type="II")
+    model.M2b = lm (AvgMoist ~ psandMatrix + Vegetation, data = b_Ped)
+      Anova(model.M2b, type="II")
+      summary(model.M2b)
+
+
+    model.M3a = lm (AvgMoist ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = c_Mat)
+    Anova(model.M3a, type="II")
+    model.M3b = lm (AvgMoist ~ psandMatrix + Vegetation, data = c_Mat)
+       Anova(model.M3b, type="II")
+       summary(model.3b)
 
 # PERCENT CLAY
-    model.C1 = lm (pclay ~ psandMatrix + Vegetation, data = a_Mou)
-      Anova(model.C1, type="II")
-    model.C2 = lm (pclay ~ psandMatrix + Vegetation, data = b_Ped)
-      Anova(model.C2, type="II")
-    model.C3 = lm (pclay ~ psandMatrix + Vegetation, data = c_Mat)
-      Anova(model.C3, type="II")
+    model.C1a = lm (pclay ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = a_Mou)
+    Anova(model.C1a, type="II")
+    model.C1b = lm (pclay ~ psandMatrix + Vegetation, data = a_Mou)
+      Anova(model.C1b, type="II")
+      summary(model.C1b)
+
+    model.C2a = lm (pclay ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = b_Ped)
+    Anova(model.C2a, type="II")
+    model.C2b = lm (pclay ~ psandMatrix + Vegetation, data = b_Ped)
+      Anova(model.C2b, type="II")
+      summary(model.C2b)
+
+    model.C3a = lm (pclay ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = c_Mat)
+      Anova(model.C3a, type="II")
+    model.C3b = lm (pclay ~ psandMatrix + Vegetation, data = c_Mat)
+      Anova(model.C3b, type="II")
+      summary(model.C3b)
 
 # DEPTH AFTER 1 STRIKE
-    model.D1 = lm (AvgDepth1S ~ psandMatrix + Vegetation, data = a_Mou)
-      Anova(model.D1, type="II")
-    model.D2 = lm (AvgDepth1S ~ psandMatrix + Vegetation, data = b_Ped)
-      Anova(model.D2, type="II")
-    model.D3 = lm (AvgDepth1S ~ psandMatrix + Vegetation, data = c_Mat)
-      Anova(model.D3, type="II")
+    model.D1a = lm (AvgDepth1S ~ psandMatrix + Vegetation +psandMatrix*Vegetation, data = a_Mou)
+      Anova(model.D1a, type="II")
+    model.D1b = lm (AvgDepth1S ~ psandMatrix + Vegetation, data = a_Mou)
+      Anova(model.D1b, type="II")
+      summary(model.D1b)
+
+    model.D2a = lm (AvgDepth1S ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = b_Ped)
+      Anova(model.D2a, type="II")
+    model.D2b = lm (AvgDepth1S ~ psandMatrix + Vegetation , data = b_Ped)
+      Anova(model.D2b, type="II")
+      summary(model.D2b)
+
+    model.D3a = lm (AvgDepth1S ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = c_Mat)
+      Anova(model.D3a, type="II")
+    model.D3b = lm (AvgDepth1S ~ psandMatrix + Vegetation, data = c_Mat)
+      Anova(model.D3b, type="II")
 
 
 
@@ -172,10 +214,16 @@ library(car)
       e_B   <- dplyr::filter(Moist2, Vegetation == "Bare")
 
             # INFILTRATION
+            model.I4 = lm (HC_mmh ~ psandMatrix + Component + psandMatrix:Component, data = d_G)
             model.I4 = lm (HC_mmh ~ psandMatrix + Component, data = d_G)
               Anova(model.I4, type="II")
+
+            model.I5 = lm (HC_mmh ~ psandMatrix + Component + psandMatrix:Component, data = e_B)
             model.I5 = lm (HC_mmh ~ psandMatrix + Component, data = e_B)
               Anova(model.I5, type="II")
+
+
+
 
             # MOISTURE
             model.M4 = lm (AvgMoist ~ psandMatrix + Component, data = d_G)
@@ -196,3 +244,18 @@ library(car)
               Anova(model.D5, type="II")
 
 
+################################################################################################################################################
+    #### Supplemental Figures
+              # tO Plot all data simultaneously IN 3X3X4 PLOT
+              # fix structure of data so can label correctly
+              go   <- dplyr::select(Moist2, Geology:Component, psandMatrix, HC_mmh:pclay, AvgMoist, AvgDepth1S)
+              go.l <- gather(go, Stat, Value, HC_mmh:AvgDepth1S)
+              go.l$Stat <- as.factor(go.l$Stat)
+              levels(go.l$Stat) <- c("Avg. Depth Strike 1 (cm)", "Avg. % Soil Moisture", "Infiltration (mm/h)", "Soil % Clay")
+              go.l$Stat <- factor(go.l$Stat, levels =c( "Infiltration (mm/h)", "Avg. Depth Strike 3 (cm)", "Avg. % Soil Moisture", "Soil % Clay"))
+              levels(go.l$Stat) <- c( "Infiltration (mm/h)", "Depth after 1 Strikes (cm)", "Avg. % Soil Moisture", "% Clay")
+              go.l$Component <- factor(go.l$Component, levels = c("Mound", "Pediment", "Matrix"))
+
+              ggplot(data=go.l,  aes(x=psandMatrix, y=Value, color=Component)) + geom_point()+ scale_color_manual(values=c("green","red", "blue"))+
+                facet_grid(Stat~Vegetation, scales="free")+(geom_smooth(method=lm))+labs(color = "r", x = "% Sand Matrix Soil")+
+                theme_bw()+ theme(text = element_text(size = 20), axis.title.y = element_blank(), legend.position = "top")
