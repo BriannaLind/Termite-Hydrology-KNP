@@ -98,13 +98,13 @@ library(car)
         go   <- dplyr::select(Moist2, Geology:Component, psandMatrix, HC_mmh:pclay, AvgMoist, AvgDepth1S)
         go.l <- gather(go, Stat, Value, HC_mmh:AvgDepth1S)
         go.l$Stat <- as.factor(go.l$Stat)
-        levels(go.l$Stat) <- c("Avg. Depth Strike 1 (cm)", "Avg. % Soil Moisture", "Infiltration (mm/h)", "Soil % Clay")
-        go.l$Stat <- factor(go.l$Stat, levels =c( "Infiltration (mm/h)", "Avg. Depth Strike 1 (cm)", "Avg. % Soil Moisture", "Soil % Clay"))
-        levels(go.l$Stat) <- c( "Infiltration (mm/h)", "Depth after 1 Strikes (cm)", "Avg. % Soil Moisture", "% Clay")
+        levels(go.l$Stat) <- c("Penentration Depth (cm)", "Avg. % Soil Moisture", "Infiltration (mm/h)", "Soil % Clay")
+        go.l$Stat <- factor(go.l$Stat, levels =c( "Infiltration (mm/h)", "Penentration Depth (cm)", "Avg. % Soil Moisture", "Soil % Clay"))
+        levels(go.l$Stat) <- c( "Infiltration (mm/h)", "Penentration Depth (cm)", "Avg. % Soil Moisture", "% Clay")
         go.l$Component <- factor(go.l$Component, levels = c("Mound", "Pediment", "Matrix"))
 
         ggplot(data=go.l,  aes(x=psandMatrix, y=Value, color=Vegetation)) + geom_point()+ scale_color_manual(values=c("yellow2","seagreen3"))+
-          facet_grid(Stat~Component, scales="free")+(geom_smooth(method=lm))+labs(color = "Vegetation Cover", x = "% Sand Matrix Soil")+
+          facet_grid(Stat~Component, scales="free")+(geom_smooth(method=lm))+labs(color = "Vegetation Cover", x = "Topsoil Texture: % Sand")+
           theme_bw()+ theme(text = element_text(size = 20), axis.title.y = element_blank(), legend.position = "top")
 
 
@@ -166,7 +166,7 @@ library(car)
     Anova(model.M3a, type="II")
     model.M3b = lm (AvgMoist ~ psandMatrix + Vegetation, data = c_Mat)
        Anova(model.M3b, type="II")
-       summary(model.3b)
+       summary(model.M3b)
 
 # PERCENT CLAY
     model.C1a = lm (pclay ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = a_Mou)
