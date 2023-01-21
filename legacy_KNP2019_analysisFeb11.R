@@ -115,6 +115,7 @@ library(car)
 # Perform Statistical Analyses
 
 # Use ANCOVA for analysis - example here: https://www.datanovia.com/en/lessons/ancova-in-r/
+                              # and here: https://rcompanion.org/rcompanion/e_04.html
       # Want to compare means -  broadly similar assumption to ANOVA
       # ANCOVAs: generally used to refine estimates of experimental error and adjust for treatment effects.
       # there are 5 assumptions (Linearity, homogeneity of regression slopes, normality of residuals, homogeneity of variances, and no outliers).

@@ -1,4 +1,39 @@
-> summary(model.I1)
+# INFILTRATION
+>     model.I1a = lm (HC_mmh ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = a_Mou) # model 1
+>       Anova(model.I1a, type="II")
+Anova Table (Type II tests)
+
+Response: HC_mmh
+                        Sum Sq Df F value    Pr(>F)
+psandMatrix               47.8  1  0.1360    0.7137
+Vegetation              9702.9  1 27.5807 2.415e-06 ***
+psandMatrix:Vegetation   266.0  1  0.7562    0.3882
+Residuals              19700.9 56
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+>     model.I1b = lm (HC_mmh ~ psandMatrix + Vegetation,           data = a_Mou) # model 2
+>       Anova(model.I1a, type="II")
+Anova Table (Type II tests)
+
+Response: HC_mmh
+                        Sum Sq Df F value    Pr(>F)
+psandMatrix               47.8  1  0.1360    0.7137
+Vegetation              9702.9  1 27.5807 2.415e-06 ***
+psandMatrix:Vegetation   266.0  1  0.7562    0.3882
+Residuals              19700.9 56
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+>       Anova(model.I1b, type="II")
+Anova Table (Type II tests)
+
+Response: HC_mmh
+             Sum Sq Df F value    Pr(>F)
+psandMatrix    47.8  1  0.1365    0.7131
+Vegetation   9702.9  1 27.6992 2.232e-06 ***
+Residuals   19966.9 57
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+> summary(model.I1b)
 
 Call:
 lm(formula = HC_mmh ~ psandMatrix + Vegetation, data = a_Mou)
@@ -19,7 +54,33 @@ Residual standard error: 18.72 on 57 degrees of freedom
 Multiple R-squared:  0.328,	Adjusted R-squared:  0.3045
 F-statistic: 13.91 on 2 and 57 DF,  p-value: 1.2e-05
 
-> summary(model.I2)
+>     model.I2a = lm (HC_mmh ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = b_Ped)
+>       Anova(model.I2a, type="II")
+Anova Table (Type II tests)
+
+Response: HC_mmh
+                        Sum Sq Df F value    Pr(>F)
+psandMatrix             1572.0  1  2.9870 0.0894476 .
+Vegetation              7410.0  1 14.0802 0.0004178 ***
+psandMatrix:Vegetation  2045.1  1  3.8861 0.0536371 .
+Residuals              29471.2 56
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+>     model.I2b = lm (HC_mmh ~ psandMatrix + Vegetation,                          data = b_Ped)
+>       Anova(model.I2b, type="II")
+Anova Table (Type II tests)
+
+Response: HC_mmh
+            Sum Sq Df F value    Pr(>F)
+psandMatrix   1572  1   2.843 0.0972382 .
+Vegetation    7410  1  13.402 0.0005514 ***
+Residuals    31516 57
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+>       Summary(model.I2b)
+Error in (function (classes, fdef, mtable)  :
+  unable to find an inherited method for function ‘Summary’ for signature ‘"lm"’
+>       summary(model.I2b)
 
 Call:
 lm(formula = HC_mmh ~ psandMatrix + Vegetation, data = b_Ped)
@@ -40,7 +101,30 @@ Residual standard error: 23.51 on 57 degrees of freedom
 Multiple R-squared:  0.2215,	Adjusted R-squared:  0.1942
 F-statistic: 8.108 on 2 and 57 DF,  p-value: 0.0007967
 
-> summary(model.I3)
+>     model.I3a = lm (HC_mmh ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = c_Mat)
+>       Anova(model.I3a, type="II")
+Anova Table (Type II tests)
+
+Response: HC_mmh
+                       Sum Sq Df F value  Pr(>F)
+psandMatrix             12300  1  8.1422 0.00605 **
+Vegetation                  0  1  0.0002 0.98823
+psandMatrix:Vegetation     48  1  0.0318 0.85903
+Residuals               84596 56
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+>     model.I3b = lm (HC_mmh ~ psandMatrix + Vegetation,                          data = c_Mat)
+>       Anova(model.I3b, type="II")
+Anova Table (Type II tests)
+
+Response: HC_mmh
+            Sum Sq Df F value   Pr(>F)
+psandMatrix  12300  1  8.2829 0.005624 **
+Vegetation       0  1  0.0002 0.988129
+Residuals    84644 57
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+>       summary(model.I3b)
 
 Call:
 lm(formula = HC_mmh ~ psandMatrix + Vegetation, data = c_Mat)
@@ -61,116 +145,66 @@ Residual standard error: 38.54 on 57 degrees of freedom
 Multiple R-squared:  0.1269,	Adjusted R-squared:  0.09625
 F-statistic: 4.142 on 2 and 57 DF,  p-value: 0.02092
 
-> summary(model.I4)
+> # MOISTURE
+>     model.M1a = lm (AvgMoist ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = a_Mou)
+>       Anova(model.M1a, type="II")
+Anova Table (Type II tests)
+
+Response: AvgMoist
+                       Sum Sq Df F value    Pr(>F)
+psandMatrix            110.52  1 18.2370 7.621e-05 ***
+Vegetation              46.80  1  7.7234  0.007407 **
+psandMatrix:Vegetation  24.55  1  4.0510  0.048963 *
+Residuals              339.36 56
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+>       summary(model.M1a)
 
 Call:
-lm(formula = HC_mmh ~ psandMatrix + Component, data = d_G)
+lm(formula = AvgMoist ~ psandMatrix + Vegetation + psandMatrix *
+    Vegetation, data = a_Mou)
 
 Residuals:
     Min      1Q  Median      3Q     Max
--37.485 -23.229  -5.222  15.957 102.384
+-4.1851 -1.4592 -0.3885  1.2963  6.3732
 
 Coefficients:
-                  Estimate Std. Error t value Pr(>|t|)
-(Intercept)       -21.0429    17.3505  -1.213  0.22852
-psandMatrix         0.6886     0.2244   3.069  0.00288 **
-ComponentPediment   5.4453     7.8097   0.697  0.48753
-ComponentMatrix     3.8879     7.8097   0.498  0.61987
+                             Estimate Std. Error t value Pr(>|t|)
+(Intercept)                   7.21295    2.43881   2.958  0.00453 **
+psandMatrix                  -0.04981    0.03267  -1.524  0.13302
+VegetationGrassy              8.47873    3.39499   2.497  0.01548 *
+psandMatrix:VegetationGrassy -0.09153    0.04548  -2.013  0.04896 *
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
-Residual standard error: 30.25 on 86 degrees of freedom
-Multiple R-squared:  0.1035,	Adjusted R-squared:  0.07226
-F-statistic: 3.311 on 3 and 86 DF,  p-value: 0.02384
+Residual standard error: 2.462 on 56 degrees of freedom
+Multiple R-squared:  0.3494,	Adjusted R-squared:  0.3145
+F-statistic: 10.02 on 3 and 56 DF,  p-value: 2.19e-05
 
-> summary(model.I5)
+>     model.M2a = lm (AvgMoist ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = b_Ped)
+>       Anova(model.M2a, type="II")
+Anova Table (Type II tests)
 
-Call:
-lm(formula = HC_mmh ~ psandMatrix + Component, data = e_B)
-
-Residuals:
-    Min      1Q  Median      3Q     Max
--33.503 -11.754  -3.288   5.932 130.451
-
-Coefficients:
-                  Estimate Std. Error t value Pr(>|t|)
-(Intercept)        -15.586     15.812  -0.986    0.327
-psandMatrix          0.267      0.205   1.302    0.196
-ComponentPediment    8.673      6.907   1.256    0.213
-ComponentMatrix     29.534      6.907   4.276 4.91e-05 ***
+Response: AvgMoist
+                       Sum Sq Df F value    Pr(>F)
+psandMatrix            176.97  1 16.0431 0.0001843 ***
+Vegetation              55.64  1  5.0440 0.0286759 *
+psandMatrix:Vegetation  11.73  1  1.0635 0.3068555
+Residuals              617.74 56
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+>     model.M2b = lm (AvgMoist ~ psandMatrix + Vegetation, data = b_Ped)
+>       Anova(model.M2b, type="II")
+Anova Table (Type II tests)
 
-Residual standard error: 26.75 on 86 degrees of freedom
-Multiple R-squared:  0.1964,	Adjusted R-squared:  0.1684
-F-statistic: 7.006 on 3 and 86 DF,  p-value: 0.0002852
-
-> summary(model.M5)
-
-Call:
-lm(formula = AvgMoist ~ psandMatrix + Component, data = e_B)
-
-Residuals:
-    Min      1Q  Median      3Q     Max
--4.6934 -1.8740 -0.5432  1.1845 12.0573
-
-Coefficients:
-                  Estimate Std. Error t value Pr(>|t|)
-(Intercept)       11.68845    1.67742   6.968 6.13e-10 ***
-psandMatrix       -0.11081    0.02175  -5.096 2.03e-06 ***
-ComponentPediment -0.15637    0.73273  -0.213   0.8315
-ComponentMatrix    1.65200    0.73273   2.255   0.0267 *
+Response: AvgMoist
+            Sum Sq Df F value    Pr(>F)
+psandMatrix 176.97  1 16.0253 0.0001827 ***
+Vegetation   55.64  1  5.0383 0.0286900 *
+Residuals   629.48 57
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-Residual standard error: 2.838 on 86 degrees of freedom
-Multiple R-squared:   0.28,	Adjusted R-squared:  0.2549
-F-statistic: 11.15 on 3 and 86 DF,  p-value: 2.977e-06
-
-> summary(model.M4)
-
-Call:
-lm(formula = AvgMoist ~ psandMatrix + Component, data = d_G)
-
-Residuals:
-    Min      1Q  Median      3Q     Max
--5.9409 -2.9276 -0.7808  2.6460 11.1190
-
-Coefficients:
-                  Estimate Std. Error t value Pr(>|t|)
-(Intercept)       16.59287    2.19005   7.576 3.77e-11 ***
-psandMatrix       -0.15363    0.02832  -5.424 5.27e-07 ***
-ComponentPediment  0.00490    0.98577   0.005    0.996
-ComponentMatrix   -0.05890    0.98577  -0.060    0.952
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-Residual standard error: 3.818 on 86 degrees of freedom
-Multiple R-squared:  0.2549,	Adjusted R-squared:  0.2289
-F-statistic: 9.809 on 3 and 86 DF,  p-value: 1.243e-05
-
-> summary(model.M3)
-
-Call:
-lm(formula = AvgMoist ~ psandMatrix + Vegetation, data = c_Mat)
-
-Residuals:
-   Min     1Q Median     3Q    Max
--5.077 -2.746 -1.132  2.498 11.420
-
-Coefficients:
-                 Estimate Std. Error t value Pr(>|t|)
-(Intercept)      18.33405    2.83016   6.478 2.34e-08 ***
-psandMatrix      -0.17887    0.03725  -4.802 1.18e-05 ***
-VegetationGrassy  0.05008    1.04171   0.048    0.962
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-Residual standard error: 4.035 on 57 degrees of freedom
-Multiple R-squared:  0.2881,	Adjusted R-squared:  0.2631
-F-statistic: 11.53 on 2 and 57 DF,  p-value: 6.223e-05
-
-> summary(model.M2)
+>       summary(model.M2b)
 
 Call:
 lm(formula = AvgMoist ~ psandMatrix + Vegetation, data = b_Ped)
@@ -191,28 +225,64 @@ Residual standard error: 3.323 on 57 degrees of freedom
 Multiple R-squared:  0.2702,	Adjusted R-squared:  0.2446
 F-statistic: 10.55 on 2 and 57 DF,  p-value: 0.0001261
 
-> summary(model.M1)
+>     model.M3a = lm (AvgMoist ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = c_Mat)
+>       Anova(model.M3a, type="II")
+Anova Table (Type II tests)
 
-Call:
-lm(formula = AvgMoist ~ psandMatrix + Vegetation, data = a_Mou)
-
-Residuals:
-    Min      1Q  Median      3Q     Max
--3.5434 -1.6658 -0.4882  1.2798  7.3787
-
-Coefficients:
-                 Estimate Std. Error t value Pr(>|t|)
-(Intercept)      10.67913    1.77247   6.025 1.31e-07 ***
-psandMatrix      -0.09705    0.02333  -4.161 0.000108 ***
-VegetationGrassy  1.76643    0.65240   2.708 0.008930 **
+Response: AvgMoist
+                       Sum Sq Df F value    Pr(>F)
+psandMatrix            375.41  1 22.7086 1.379e-05 ***
+Vegetation               0.04  1  0.0023    0.9621
+psandMatrix:Vegetation   2.03  1  0.1229    0.7272
+Residuals              925.77 56
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+>     model.M3b = lm (AvgMoist ~ psandMatrix + Vegetation, data = c_Mat)
+>       Anova(model.M3b, type="II")
+Anova Table (Type II tests)
 
-Residual standard error: 2.527 on 57 degrees of freedom
-Multiple R-squared:  0.3023,	Adjusted R-squared:  0.2778
-F-statistic: 12.35 on 2 and 57 DF,  p-value: 3.506e-05
+Response: AvgMoist
+            Sum Sq Df F value    Pr(>F)
+psandMatrix 375.41  1 23.0635 1.176e-05 ***
+Vegetation    0.04  1  0.0023    0.9618
+Residuals   927.80 57
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+> # PERCENT CLAY
+>     model.C1a = lm (pclay ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = a_Mou)
+>       Anova(model.C1, type="II")
+Anova Table (Type II tests)
 
-> summary(model.C1)
+Response: pclay
+             Sum Sq Df F value    Pr(>F)
+psandMatrix 1815.12  1 37.3458 9.453e-08 ***
+Vegetation    12.87  1  0.2648    0.6089
+Residuals   2770.38 57
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+>       Anova(model.C1a, type="II")
+Anova Table (Type II tests)
+
+Response: pclay
+                        Sum Sq Df F value    Pr(>F)
+psandMatrix            1815.12  1 38.5313 6.977e-08 ***
+Vegetation               12.87  1  0.2732   0.60328
+psandMatrix:Vegetation  132.35  1  2.8095   0.09928 .
+Residuals              2638.03 56
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+>     model.C1b = lm (pclay ~ psandMatrix + Vegetation, data = a_Mou)
+>       Anova(model.C1b, type="II")
+Anova Table (Type II tests)
+
+Response: pclay
+             Sum Sq Df F value    Pr(>F)
+psandMatrix 1815.12  1 37.3458 9.453e-08 ***
+Vegetation    12.87  1  0.2648    0.6089
+Residuals   2770.38 57
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+>       summary(model.C1b)
 
 Call:
 lm(formula = pclay ~ psandMatrix + Vegetation, data = a_Mou)
@@ -233,7 +303,30 @@ Residual standard error: 6.972 on 57 degrees of freedom
 Multiple R-squared:  0.3974,	Adjusted R-squared:  0.3763
 F-statistic:  18.8 on 2 and 57 DF,  p-value: 5.371e-07
 
-> summary(model.C2)
+>     model.C2a = lm (pclay ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = b_Ped)
+>     Anova(model.C2a, type="II")
+Anova Table (Type II tests)
+
+Response: pclay
+                        Sum Sq Df F value    Pr(>F)
+psandMatrix            1915.59  1 63.1194 9.531e-11 ***
+Vegetation               55.70  1  1.8352    0.1810
+psandMatrix:Vegetation   11.98  1  0.3948    0.5323
+Residuals              1699.53 56
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+>     model.C2b = lm (pclay ~ psandMatrix + Vegetation, data = b_Ped)
+>       Anova(model.C2b, type="II")
+Anova Table (Type II tests)
+
+Response: pclay
+            Sum Sq Df F value    Pr(>F)
+psandMatrix 1915.6  1 63.7967 7.215e-11 ***
+Vegetation    55.7  1  1.8549    0.1786
+Residuals   1711.5 57
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+>       summary(model.C2b)
 
 Call:
 lm(formula = pclay ~ psandMatrix + Vegetation, data = b_Ped)
@@ -254,7 +347,31 @@ Residual standard error: 5.48 on 57 degrees of freedom
 Multiple R-squared:  0.5351,	Adjusted R-squared:  0.5188
 F-statistic:  32.8 on 2 and 57 DF,  p-value: 3.315e-10
 
-> summary(model.C3)
+>     model.C3 = lm (pclay ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = c_Mat)
+>     model.C3a = lm (pclay ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = c_Mat)
+>       Anova(model.C3a, type="II")
+Anova Table (Type II tests)
+
+Response: pclay
+                        Sum Sq Df  F value    Pr(>F)
+psandMatrix            2231.34  1 107.7969 1.153e-14 ***
+Vegetation                0.14  1   0.0066    0.9353
+psandMatrix:Vegetation    6.75  1   0.3260    0.5703
+Residuals              1159.17 56
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+>     model.C3b = lm (pclay ~ psandMatrix + Vegetation, data = c_Mat)
+>       Anova(model.C3b, type="II")
+Anova Table (Type II tests)
+
+Response: pclay
+             Sum Sq Df  F value    Pr(>F)
+psandMatrix 2231.34  1 109.0867 7.456e-15 ***
+Vegetation     0.14  1   0.0067    0.9349
+Residuals   1165.92 57
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+>       summary(model.C3b)
 
 Call:
 lm(formula = pclay ~ psandMatrix + Vegetation, data = c_Mat)
@@ -275,99 +392,23 @@ Residual standard error: 4.523 on 57 degrees of freedom
 Multiple R-squared:  0.6568,	Adjusted R-squared:  0.6448
 F-statistic: 54.54 on 2 and 57 DF,  p-value: 5.79e-14
 
-> summary(model.C4)
-
-Call:
-lm(formula = pclay ~ psandMatrix + Component, data = d_G)
-
-Residuals:
-     Min       1Q   Median       3Q      Max
--13.6782  -3.0977  -0.0526   2.1023  15.7967
-
-Coefficients:
-                  Estimate Std. Error t value Pr(>|t|)
-(Intercept)       42.13652    3.17544  13.270  < 2e-16 ***
-psandMatrix       -0.37430    0.04107  -9.114 2.88e-14 ***
-ComponentPediment -3.40000    1.42931  -2.379  0.01958 *
-ComponentMatrix   -4.40000    1.42931  -3.078  0.00279 **
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-Residual standard error: 5.536 on 86 degrees of freedom
-Multiple R-squared:  0.5209,	Adjusted R-squared:  0.5041
-F-statistic: 31.16 on 3 and 86 DF,  p-value: 9.909e-14
-
-> summary(model.C5)
-
-Call:
-lm(formula = pclay ~ psandMatrix + Component, data = e_B)
-
-Residuals:
-     Min       1Q   Median       3Q      Max
--12.6119  -3.9006  -0.1466   2.9909  20.1806
-
-Coefficients:
-                  Estimate Std. Error t value Pr(>|t|)
-(Intercept)       48.64915    3.47541  13.998  < 2e-16 ***
-psandMatrix       -0.45047    0.04505  -9.998 4.59e-16 ***
-ComponentPediment -2.40000    1.51813  -1.581 0.117573
-ComponentMatrix   -5.23333    1.51813  -3.447 0.000879 ***
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-Residual standard error: 5.88 on 86 degrees of freedom
-Multiple R-squared:  0.5654,	Adjusted R-squared:  0.5502
-F-statistic: 37.29 on 3 and 86 DF,  p-value: 1.553e-15
-
-> summary(model.D5)
-
-Call:
-lm(formula = AvgDepth1S ~ psandMatrix + Component, data = e_B)
-
-Residuals:
-    Min      1Q  Median      3Q     Max
--1.9734 -0.7366 -0.2016  0.3377  8.9421
-
-Coefficients:
-                  Estimate Std. Error t value Pr(>|t|)
-(Intercept)        0.28373    0.89600   0.317   0.7523
-psandMatrix        0.02112    0.01162   1.818   0.0725 .
-ComponentPediment -0.28333    0.39139  -0.724   0.4711
-ComponentMatrix    0.40000    0.39139   1.022   0.3096
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-Residual standard error: 1.516 on 86 degrees of freedom
-Multiple R-squared:  0.06911,	Adjusted R-squared:  0.03663
-F-statistic: 2.128 on 3 and 86 DF,  p-value: 0.1025
-
-> summary(model.D4)
-
-Call:
-lm(formula = AvgDepth1S ~ psandMatrix + Component, data = d_G)
-
-Residuals:
-    Min      1Q  Median      3Q     Max
--1.9168 -0.4574 -0.1363  0.6253  3.2753
-
-Coefficients:
-                   Estimate Std. Error t value Pr(>|t|)
-(Intercept)        2.485834   0.542336   4.584 1.54e-05 ***
-psandMatrix        0.007697   0.007014   1.097  0.27557
-ComponentPediment -1.200000   0.244113  -4.916 4.19e-06 ***
-ComponentMatrix   -0.776667   0.244113  -3.182  0.00204 **
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-Residual standard error: 0.9454 on 86 degrees of freedom
-Multiple R-squared:  0.2326,	Adjusted R-squared:  0.2058
-F-statistic: 8.689 on 3 and 86 DF,  p-value: 4.242e-05
-
-> summary(model.D3)
-Error in summary(model.D3) : object 'model.D3' not found
 > # DEPTH AFTER 1 STRIKE
->     model.D1 = lm (AvgDepth1S ~ psandMatrix + Vegetation, data = a_Mou)
->       Anova(model.D1, type="II")
+>     model.D1a = lm (AvgDepth1S ~ psandMatrix + Vegetation +psandMatrix*Vegetation, data = a_Mou)
+>       Anova(model.D1a, type="II")
+Anova Table (Type II tests)
+
+Response: AvgDepth1S
+                        Sum Sq Df F value Pr(>F)
+psandMatrix              4.215  1  1.0320 0.3140
+Vegetation              22.250  1  5.4481 0.0232 *
+psandMatrix:Vegetation   2.422  1  0.5929 0.4445
+Residuals              228.705 56
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+>       summary(model.D1b)
+Error in summary(model.D1b) : object 'model.D1b' not found
+>     model.D1b = lm (AvgDepth1S ~ psandMatrix + Vegetation, data = a_Mou)
+>       Anova(model.D1b, type="II")
 Anova Table (Type II tests)
 
 Response: AvgDepth1S
@@ -377,8 +418,41 @@ Vegetation   22.250  1  5.4873 0.02267 *
 Residuals   231.127 57
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
->     model.D2 = lm (AvgDepth1S ~ psandMatrix + Vegetation, data = b_Ped)
->       Anova(model.D2, type="II")
+>       summary(model.D1b)
+
+Call:
+lm(formula = AvgDepth1S ~ psandMatrix + Vegetation, data = a_Mou)
+
+Residuals:
+    Min      1Q  Median      3Q     Max
+-1.9591 -1.1202 -0.5906  0.7228  8.9651
+
+Coefficients:
+                 Estimate Std. Error t value Pr(>|t|)
+(Intercept)       0.44280    1.41256   0.313   0.7551
+psandMatrix       0.01895    0.01859   1.020   0.3123
+VegetationGrassy  1.21793    0.51993   2.342   0.0227 *
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 2.014 on 57 degrees of freedom
+Multiple R-squared:  0.1026,	Adjusted R-squared:  0.07109
+F-statistic: 3.258 on 2 and 57 DF,  p-value: 0.04575
+
+>     model.D2a = lm (AvgDepth1S ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = b_Ped)
+>       Anova(model.D2a, type="II")
+Anova Table (Type II tests)
+
+Response: AvgDepth1S
+                        Sum Sq Df F value  Pr(>F)
+psandMatrix             0.0301  1  0.0778 0.78136
+Vegetation              1.3510  1  3.4882 0.06704 .
+psandMatrix:Vegetation  0.0318  1  0.0820 0.77567
+Residuals              21.6881 56
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+>     model.D2b = lm (AvgDepth1S ~ psandMatrix + Vegetation , data = b_Ped)
+>       Anova(model.D2b, type="II")
 Anova Table (Type II tests)
 
 Response: AvgDepth1S
@@ -388,39 +462,9 @@ Vegetation   1.3510  1  3.5453 0.06482 .
 Residuals   21.7199 57
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
->     model.D3 = lm (AvgDepth1S ~ psandMatrix + Vegetation, data = c_Mat)
->       Anova(model.D3, type="II")
-Anova Table (Type II tests)
-
-Response: AvgDepth1S
-             Sum Sq Df F value    Pr(>F)
-psandMatrix  5.6895  1 15.9161 0.0001911 ***
-Vegetation   0.0258  1  0.0722 0.7891922
-Residuals   20.3758 57
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-> summary(model.D3)
-
-Call:
-lm(formula = AvgDepth1S ~ psandMatrix + Vegetation, data = c_Mat)
-
-Residuals:
-     Min       1Q   Median       3Q      Max
--1.09704 -0.43188 -0.02707  0.37771  1.53251
-
-Coefficients:
-                 Estimate Std. Error t value Pr(>|t|)
-(Intercept)       0.61776    0.41941   1.473 0.146275
-psandMatrix       0.02202    0.00552   3.989 0.000191 ***
-VegetationGrassy  0.04147    0.15437   0.269 0.789192
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-Residual standard error: 0.5979 on 57 degrees of freedom
-Multiple R-squared:  0.219,	Adjusted R-squared:  0.1916
-F-statistic: 7.992 on 2 and 57 DF,  p-value: 0.0008721
-
-> summary(model.D2)
+> summary(D2b)
+Error in summary(D2b) : object 'D2b' not found
+> summary(model.D2b)
 
 Call:
 lm(formula = AvgDepth1S ~ psandMatrix + Vegetation, data = b_Ped)
@@ -441,23 +485,90 @@ Residual standard error: 0.6173 on 57 degrees of freedom
 Multiple R-squared:  0.05975,	Adjusted R-squared:  0.02675
 F-statistic: 1.811 on 2 and 57 DF,  p-value: 0.1728
 
-> summary(model.D1)
+>     model.D3a = lm (AvgDepth1S ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = c_Mat)
+>       Anova(model.D3a, type="II")
+Anova Table (Type II tests)
+
+Response: AvgDepth1S
+                        Sum Sq Df F value    Pr(>F)
+psandMatrix             5.6895  1 16.1468 0.0001767 ***
+Vegetation              0.0258  1  0.0732 0.7877245
+psandMatrix:Vegetation  0.6435  1  1.8262 0.1820106
+Residuals              19.7323 56
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+>     model.D3b = lm (AvgDepth1S ~ psandMatrix + Vegetation, data = c_Mat)
+>       Anova(model.Db, type="II")
+Error in Anova(model.Db, type = "II") : object 'model.Db' not found
+>       Anova(model.D3b, type="II")
+Anova Table (Type II tests)
+
+Response: AvgDepth1S
+             Sum Sq Df F value    Pr(>F)
+psandMatrix  5.6895  1 15.9161 0.0001911 ***
+Vegetation   0.0258  1  0.0722 0.7891922
+Residuals   20.3758 57
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+>     model.M3a = lm (AvgMoist ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = c_Mat)
+>     Anova(model.M3a, type="II")
+Anova Table (Type II tests)
+
+Response: AvgMoist
+                       Sum Sq Df F value    Pr(>F)
+psandMatrix            375.41  1 22.7086 1.379e-05 ***
+Vegetation               0.04  1  0.0023    0.9621
+psandMatrix:Vegetation   2.03  1  0.1229    0.7272
+Residuals              925.77 56
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+>     model.M3b = lm (AvgMoist ~ psandMatrix + Vegetation, data = c_Mat)
+>        Anova(model.M3b, type="II")
+Anova Table (Type II tests)
+
+Response: AvgMoist
+            Sum Sq Df F value    Pr(>F)
+psandMatrix 375.41  1 23.0635 1.176e-05 ***
+Vegetation    0.04  1  0.0023    0.9618
+Residuals   927.80 57
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+>        summary(model.3b)
+Error in summary(model.3b) : object 'model.3b' not found
+>        summary(model.M3b)
 
 Call:
-lm(formula = AvgDepth1S ~ psandMatrix + Vegetation, data = a_Mou)
+lm(formula = AvgMoist ~ psandMatrix + Vegetation, data = c_Mat)
 
 Residuals:
-    Min      1Q  Median      3Q     Max
--1.9591 -1.1202 -0.5906  0.7228  8.9651
+   Min     1Q Median     3Q    Max
+-5.077 -2.746 -1.132  2.498 11.420
 
 Coefficients:
                  Estimate Std. Error t value Pr(>|t|)
-(Intercept)       0.44280    1.41256   0.313   0.7551
-psandMatrix       0.01895    0.01859   1.020   0.3123
-VegetationGrassy  1.21793    0.51993   2.342   0.0227 *
+(Intercept)      18.33405    2.83016   6.478 2.34e-08 ***
+psandMatrix      -0.17887    0.03725  -4.802 1.18e-05 ***
+VegetationGrassy  0.05008    1.04171   0.048    0.962
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
-Residual standard error: 2.014 on 57 degrees of freedom
-Multiple R-squared:  0.1026,	Adjusted R-squared:  0.07109
-F-statistic: 3.258 on 2 and 57 DF,  p-value: 0.04575
+Residual standard error: 4.035 on 57 degrees of freedom
+Multiple R-squared:  0.2881,	Adjusted R-squared:  0.2631
+F-statistic: 11.53 on 2 and 57 DF,  p-value: 6.223e-05
+
+>     # tO Plot all data simultaneously IN 3X3X4 PLOT
+>     # fix structure of data so can label correctly
+>         go   <- dplyr::select(Moist2, Geology:Component, psandMatrix, HC_mmh:pclay, AvgMoist, AvgDepth1S)
+>         go.l <- gather(go, Stat, Value, HC_mmh:AvgDepth1S)
+>     # tO Plot all data simultaneously IN 3X3X4 PLOT
+>     # fix structure of data so can label correctly
+>         go   <- dplyr::select(Moist2, Geology:Component, psandMatrix, HC_mmh:pclay, AvgMoist, AvgDepth1S)
+>         go.l <- gather(go, Stat, Value, HC_mmh:AvgDepth1S)
+>         go.l$Stat <- as.factor(go.l$Stat)
+>         levels(go.l$Stat) <- c("Penentration Depth (cm)", "Avg. % Soil Moisture", "Infiltration (mm/h)", "Soil % Clay")
+>         go.l$Stat <- factor(go.l$Stat, levels =c( "Infiltration (mm/h)", "Penentration Depth (cm)", "Avg. % Soil Moisture", "Soil % Clay"))
+>         levels(go.l$Stat) <- c( "Infiltration (mm/h)", "Penentration Depth (cm)", "Avg. % Soil Moisture", "% Clay")
+>         go.l$Component <- factor(go.l$Component, levels = c("Mound", "Pediment", "Matrix"))
+>         ggplot(data=go.l,  aes(x=psandMatrix, y=Value, color=Vegetation)) + geom_point()+ scale_color_manual(values=c("yellow2","seagreen3"))+
++           facet_grid(Stat~Component, scales="free")+(geom_smooth(method=lm))+labs(color = "Vegetation Cover", x = "Topsoil Texture: % Sand")+
++           theme_bw()+ theme(text = element_text(size = 20), axis.title.y = element_blank(), legend.position = "top")
