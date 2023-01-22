@@ -120,7 +120,7 @@ library(car)
       # ANCOVAs: generally used to refine estimates of experimental error and adjust for treatment effects.
       # there are 5 assumptions (Linearity, homogeneity of regression slopes, normality of residuals, homogeneity of variances, and no outliers).
 
-
+       library(emmeans)
 # Subset Data to strategically perform contrasts ANCOVAS
       head(Moist2)
 
@@ -132,79 +132,107 @@ library(car)
 # For each of my 4 response variables (Infiltration, Depth after 1 strike, Avg. Soil Moisture, % Clay)
 # Want to run an ANCOVA comparing grassy vs bare vegetation cover
 
-# INFILTRATION
-    model.I1a = lm (HC_mmh ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = a_Mou) # model 1
-    Anova(model.I1a, type="II")
-    model.I1b = lm (HC_mmh ~ psandMatrix + Vegetation,           data = a_Mou) # model 2
-      Anova(model.I1b, type="II")
-      summary(model.I1b)
+ # # Response variable 1: INFILTRATION RATE (mm/h)
+    # Mound, Infiltration
+          # model.I1a = lm (HC_mmh ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = a_Mou) # model 1
+          # Anova(model.I1a, type="II"): : no interaction effect found make new model
+        model.I1b = lm (HC_mmh ~ psandMatrix + Vegetation,           data = a_Mou) # model 2
+        Anova(model.I1b, type="II")
+        summary(model.I1b)
+        emmeans_test(a_Mou, HC_mmh ~ Vegetation, covariate = psandMatrix, p.adjust.method = "bonferroni")
 
-    model.I2a = lm (HC_mmh ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = b_Ped)
-    Anova(model.I2a, type="II")
-    model.I2b = lm (HC_mmh ~ psandMatrix + Vegetation,                          data = b_Ped)
-      Anova(model.I2b, type="II")
-      summary(model.I2b)
+    # Pediment, Infiltration
+          # model.I2a = lm (HC_mmh ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = b_Ped)
+          # Anova(model.I2a, type="II"): no interaction effect found make new model
+        model.I2b = lm (HC_mmh ~ psandMatrix + Vegetation,                          data = b_Ped)
+        Anova(model.I2b, type="II")
+        summary(model.I2b)
+        emmeans_test(b_Ped, HC_mmh ~ Vegetation, covariate = psandMatrix, p.adjust.method = "bonferroni")
 
-    model.I3a = lm (HC_mmh ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = c_Mat)
-    Anova(model.I3a, type="II")
-    model.I3b = lm (HC_mmh ~ psandMatrix + Vegetation,                          data = c_Mat)
-     Anova(model.I3b, type="II")
-      summary(model.I3b)
-
-# MOISTURE
-    model.M1a = lm (AvgMoist ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = a_Mou)
-      Anova(model.M1a, type="II")
-      summary(model.M1a)
-
-    model.M2a = lm (AvgMoist ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = b_Ped)
-    Anova(model.M2a, type="II")
-    model.M2b = lm (AvgMoist ~ psandMatrix + Vegetation, data = b_Ped)
-      Anova(model.M2b, type="II")
-      summary(model.M2b)
+    # Matrix, Infiltration
+          # model.I3a = lm (HC_mmh ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = c_Mat)
+          # Anova(model.I3a, type="II"): no interaction effect found make new model
+        model.I3b = lm (HC_mmh ~ psandMatrix + Vegetation,                          data = c_Mat)
+        Anova(model.I3b, type="II")
+        summary(model.I3b)
+        emmeans_test(c_Mat, HC_mmh ~ Vegetation, covariate = psandMatrix, p.adjust.method = "bonferroni")
 
 
-    model.M3a = lm (AvgMoist ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = c_Mat)
-    Anova(model.M3a, type="II")
-    model.M3b = lm (AvgMoist ~ psandMatrix + Vegetation, data = c_Mat)
-       Anova(model.M3b, type="II")
-       summary(model.M3b)
+ # Response variable 2: PENETRATION DEPTH (CM)
+      # Mound, Penetration Depth
+          # model.D1a = lm (AvgDepth1S ~ psandMatrix + Vegetation +psandMatrix*Vegetation, data = a_Mou)
+          # Anova(model.D1a, type="II"): no interaction effect found make new model
+        model.D1b = lm (AvgDepth1S ~ psandMatrix + Vegetation, data = a_Mou)
+        Anova(model.D1b, type="II")
+        summary(model.D1b)
+        emmeans_test(a_Mou, AvgDepth1S ~ Vegetation, covariate = psandMatrix, p.adjust.method = "bonferroni")
 
-# PERCENT CLAY
-    model.C1a = lm (pclay ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = a_Mou)
-    Anova(model.C1a, type="II")
-    model.C1b = lm (pclay ~ psandMatrix + Vegetation, data = a_Mou)
-      Anova(model.C1b, type="II")
-      summary(model.C1b)
+      # Pediment, Penetration Depth
+           # model.D2a = lm (AvgDepth1S ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = b_Ped)
+           # Anova(model.D2a, type="II"): no interaction effect found make new model
+        model.D2b = lm (AvgDepth1S ~ psandMatrix + Vegetation , data = b_Ped)
+        Anova(model.D2b, type="II")
+        summary(model.D2b)
+        emmeans_test(b_Ped, AvgDepth1S ~ Vegetation, covariate = psandMatrix, p.adjust.method = "bonferroni")
 
-    model.C2a = lm (pclay ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = b_Ped)
-    Anova(model.C2a, type="II")
-    model.C2b = lm (pclay ~ psandMatrix + Vegetation, data = b_Ped)
-      Anova(model.C2b, type="II")
-      summary(model.C2b)
+      # Matrix, Penetration depth
+            # model.D3a = lm (AvgDepth1S ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = c_Mat)
+            # Anova(model.D3a, type="II"): no interaction effect found make new model
+        model.D3b = lm (AvgDepth1S ~ psandMatrix + Vegetation, data = c_Mat)
+        Anova(model.D3b, type="II")
+        emmeans_test(c_Mat, AvgDepth1S ~ Vegetation, covariate = psandMatrix, p.adjust.method = "bonferroni")
 
-    model.C3a = lm (pclay ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = c_Mat)
-      Anova(model.C3a, type="II")
-    model.C3b = lm (pclay ~ psandMatrix + Vegetation, data = c_Mat)
-      Anova(model.C3b, type="II")
-      summary(model.C3b)
 
-# DEPTH AFTER 1 STRIKE
-    model.D1a = lm (AvgDepth1S ~ psandMatrix + Vegetation +psandMatrix*Vegetation, data = a_Mou)
-      Anova(model.D1a, type="II")
-    model.D1b = lm (AvgDepth1S ~ psandMatrix + Vegetation, data = a_Mou)
-      Anova(model.D1b, type="II")
-      summary(model.D1b)
 
-    model.D2a = lm (AvgDepth1S ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = b_Ped)
-      Anova(model.D2a, type="II")
-    model.D2b = lm (AvgDepth1S ~ psandMatrix + Vegetation , data = b_Ped)
-      Anova(model.D2b, type="II")
-      summary(model.D2b)
+ # Response variable 3: % SOIL MOISTURE
+        # Mound, Moisture
+        model.M1a = lm (AvgMoist ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = a_Mou)
+        Anova(model.M1a, type="II")
+        summary(model.M1a)
+        emmeans_test(a_Mou, AvgMoist ~ Vegetation, covariate = psandMatrix, p.adjust.method = "bonferroni")
 
-    model.D3a = lm (AvgDepth1S ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = c_Mat)
-      Anova(model.D3a, type="II")
-    model.D3b = lm (AvgDepth1S ~ psandMatrix + Vegetation, data = c_Mat)
-      Anova(model.D3b, type="II")
+        # Pediment, Moisture
+            # model.M2a = lm (AvgMoist ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = b_Ped)
+            # Anova(model.M2a, type="II"): no interaction effect found make new model
+        model.M2b = lm (AvgMoist ~ psandMatrix + Vegetation, data = b_Ped)
+        Anova(model.M2b, type="II")
+        summary(model.M2b)
+        emmeans_test(b_Ped, AvgMoist ~ Vegetation, covariate = psandMatrix, p.adjust.method = "bonferroni")
+
+        # Matrix, Moisture
+            # model.M3a = lm (AvgMoist ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = c_Mat)
+            # Anova(model.M3a, type="II"): no interaction effect found make new model
+        model.M3b = lm (AvgMoist ~ psandMatrix + Vegetation, data = c_Mat)
+        Anova(model.M3b, type="II")
+        summary(model.M3b)
+        emmeans_test(c_Mat, AvgMoist ~ Vegetation, covariate = psandMatrix, p.adjust.method = "bonferroni")
+
+ # Response variable 4: % SOIL CLAY
+        # Mound, Clay
+            # model.C1a = lm (pclay ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = a_Mou)
+            # Anova(model.C1a, type="II"): no interaction effect found make new model
+        model.C1b = lm (pclay ~ psandMatrix + Vegetation, data = a_Mou)
+        Anova(model.C1b, type="II")
+        summary(model.C1b)
+        emmeans_test(a_Mou, pclay ~ Vegetation, covariate = psandMatrix, p.adjust.method = "bonferroni")
+
+        # Pediment, Clay
+            # model.C2a = lm (pclay ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = b_Ped)
+            # Anova(model.C2a, type="II"): no interaction effect found make new model
+        model.C2b = lm (pclay ~ psandMatrix + Vegetation, data = b_Ped)
+        Anova(model.C2b, type="II")
+        summary(model.C2b)
+        emmeans_test(b_Ped, pclay ~ Vegetation, covariate = psandMatrix, p.adjust.method = "bonferroni")
+
+        # Matrix, Clay
+            # model.C3a = lm (pclay ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = c_Mat)
+            # Anova(model.C3a, type="II"): no interaction effect found make new model
+        model.C3b = lm (pclay ~ psandMatrix + Vegetation, data = c_Mat)
+        Anova(model.C3b, type="II")
+        summary(model.C3b)
+        emmeans_test(c_Mat, pclay ~ Vegetation, covariate = psandMatrix, p.adjust.method = "bonferroni")
+
+
 
 
 
