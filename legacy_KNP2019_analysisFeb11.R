@@ -9,6 +9,7 @@ library(dplyr)
 library(tidyr)
 library(rstatix)
 library(car)
+library(emmeans)
 
 
 ####### Data Integration #########################################################################
@@ -120,7 +121,7 @@ library(car)
       # ANCOVAs: generally used to refine estimates of experimental error and adjust for treatment effects.
       # there are 5 assumptions (Linearity, homogeneity of regression slopes, normality of residuals, homogeneity of variances, and no outliers).
 
-       library(emmeans)
+
 # Subset Data to strategically perform contrasts ANCOVAS
       head(Moist2)
 
@@ -173,14 +174,13 @@ library(car)
         model.D2b = lm (AvgDepth1S ~ psandMatrix + Vegetation , data = b_Ped)
         Anova(model.D2b, type="II")
         summary(model.D2b)
-        emmeans_test(b_Ped, AvgDepth1S ~ Vegetation, covariate = psandMatrix, p.adjust.method = "bonferroni")
 
       # Matrix, Penetration depth
             # model.D3a = lm (AvgDepth1S ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = c_Mat)
             # Anova(model.D3a, type="II"): no interaction effect found make new model
         model.D3b = lm (AvgDepth1S ~ psandMatrix + Vegetation, data = c_Mat)
         Anova(model.D3b, type="II")
-        emmeans_test(c_Mat, AvgDepth1S ~ Vegetation, covariate = psandMatrix, p.adjust.method = "bonferroni")
+        summary(model.D3b)
 
 
 
@@ -205,12 +205,12 @@ library(car)
         model.M3b = lm (AvgMoist ~ psandMatrix + Vegetation, data = c_Mat)
         Anova(model.M3b, type="II")
         summary(model.M3b)
-        emmeans_test(c_Mat, AvgMoist ~ Vegetation, covariate = psandMatrix, p.adjust.method = "bonferroni")
+
 
  # Response variable 4: % SOIL CLAY
         # Mound, Clay
-            # model.C1a = lm (pclay ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = a_Mou)
-            # Anova(model.C1a, type="II"): no interaction effect found make new model
+        model.C1a = lm (pclay ~ psandMatrix + Vegetation + psandMatrix*Vegetation, data = a_Mou)
+        Anova(model.C1a, type="II")#: no interaction effect found make new model
         model.C1b = lm (pclay ~ psandMatrix + Vegetation, data = a_Mou)
         Anova(model.C1b, type="II")
         summary(model.C1b)
@@ -242,36 +242,69 @@ library(car)
       d_G   <- dplyr::filter(Moist2, Vegetation == "Grassy")
       e_B   <- dplyr::filter(Moist2, Vegetation == "Bare")
 
-            # INFILTRATION
-            model.I4 = lm (HC_mmh ~ psandMatrix + Component + psandMatrix:Component, data = d_G)
-            model.I4 = lm (HC_mmh ~ psandMatrix + Component, data = d_G)
-              Anova(model.I4, type="II")
+ # Response variable 1: INFILTRATION RATE (mm/h)
+      # Grassy, Infiltration
+          # model.GIa = lm (HC_mmh ~ psandMatrix + Component + psandMatrix*Component, data = d_G) # model 1
+          # Anova(model.GIa, type="II"): no interaction effect found make new model
+      model.GIb = lm (HC_mmh ~ psandMatrix + Component,           data = d_G) # model 2
+      Anova(model.GIb, type="II")
+      summary(model.GIb)
+      emmeans_test(d_G, HC_mmh ~ Component, covariate = psandMatrix, p.adjust.method = "bonferroni")
 
-            model.I5 = lm (HC_mmh ~ psandMatrix + Component + psandMatrix:Component, data = e_B)
-            model.I5 = lm (HC_mmh ~ psandMatrix + Component, data = e_B)
-              Anova(model.I5, type="II")
+      # Bare, Infiltration
+      model.BIa = lm (HC_mmh ~ psandMatrix + Component + psandMatrix*Component, data = e_B) # model 1
+      Anova(model.BIa, type="II")
+      summary(model.BIa)
+      emmeans_test(e_B, HC_mmh ~ Component, covariate = psandMatrix, p.adjust.method = "bonferroni")
 
+ # Response variable 2: PENETRATION DEPTH
+      # Grassy, Penetration
+          # model.GDa = lm (AvgDepth1S ~ psandMatrix + Component + psandMatrix*Component, data = d_G) # model 1
+          # Anova(model.GDa, type="II")#: no interaction effect found make new model
+      model.GDb = lm (AvgDepth1S ~ psandMatrix + Component,           data = d_G) # model 2
+      Anova(model.GDb, type="II")
+      summary(model.GDb)
+      emmeans_test(d_G, AvgDepth1S ~ Component, covariate = psandMatrix, p.adjust.method = "bonferroni")
 
+      # Bare, Penetration
+          # model.BDa = lm (AvgDepth1S ~ psandMatrix + Component + psandMatrix*Component, data = e_B) # model 1
+          # Anova(model.BDa, type="II")
+      model.BDb = lm (AvgDepth1S ~ psandMatrix + Component,           data = e_B) # model 2
+      Anova(model.BDb, type="II")
+      summary(model.BDb)
+      emmeans_test(e_B, AvgDepth1S ~ Component, covariate = psandMatrix, p.adjust.method = "bonferroni")
 
+ # Response variable 3: SOIL MOISTURE
+      # Grassy, moisture
+          # model.GMa = lm (AvgMoist ~ psandMatrix + Component + psandMatrix*Component, data = d_G) # model 1
+          # Anova(model.GMa, type="II")#: no interaction effect found make new model
+      model.GMb = lm (AvgMoist ~ psandMatrix + Component,           data = d_G) # model 2
+      Anova(model.GMb, type="II")
+      summary(model.GMb)
+      emmeans_test(d_G, AvgMoist ~ Component, covariate = psandMatrix, p.adjust.method = "bonferroni")
 
-            # MOISTURE
-            model.M4 = lm (AvgMoist ~ psandMatrix + Component, data = d_G)
-              Anova(model.M4, type="II")
-            model.M5 = lm (AvgMoist ~ psandMatrix + Component, data = e_B)
-              Anova(model.M5, type="II")
+      # Bare, moisture
+      model.BMa = lm (AvgMoist ~ psandMatrix + Component + psandMatrix*Component, data = e_B) # model 1
+      Anova(model.BMa, type="II")
+      summary(model.BMa)
+      emmeans_test(e_B, AvgMoist ~ Component, covariate = psandMatrix, p.adjust.method = "bonferroni")
 
-            # PERCENT CLAY
-            model.C4 = lm (pclay ~ psandMatrix + Component, data = d_G)
-              Anova(model.C4, type="II")
-            model.C5 = lm (pclay ~ psandMatrix + Component, data = e_B)
-              Anova(model.C5, type="II")
+ # Response variable 4: PERENT CLAY
+      # Grassy, clay
+          # model.GCa = lm (pclay ~ psandMatrix + Component + psandMatrix*Component, data = d_G) # model 1
+          # Anova(model.GCa, type="II")#: no interaction effect found make new model
+      model.GCb = lm (pclay ~ psandMatrix + Component,           data = d_G) # model 2
+      Anova(model.GCb, type="II")
+      summary(model.GCb)
+      emmeans_test(d_G, pclay ~ Component, covariate = psandMatrix, p.adjust.method = "bonferroni")
 
-            # DEPTH AFTER 1 STRIKE
-            model.D4 = lm (AvgDepth1S ~ psandMatrix + Component, data = d_G)
-              Anova(model.D4, type="II")
-            model.D5 = lm (AvgDepth1S ~ psandMatrix + Component, data = e_B)
-              Anova(model.D5, type="II")
-
+      # Bare, moisture
+          # model.BCa = lm (pclay ~ psandMatrix + Component + psandMatrix*Component, data = e_B) # model 1
+          # Anova(model.BCa, type="II")
+      model.BCb = lm (pclay ~ psandMatrix + Component + psandMatrix, data = e_B) # model 1
+      Anova(model.BCb, type="II")
+      summary(model.BCb)
+      emmeans_test(e_B, pclay ~ Component, covariate = psandMatrix, p.adjust.method = "bonferroni")
 
 ################################################################################################################################################
     #### Supplemental Figures
@@ -280,11 +313,11 @@ library(car)
               go   <- dplyr::select(Moist2, Geology:Component, psandMatrix, HC_mmh:pclay, AvgMoist, AvgDepth1S)
               go.l <- gather(go, Stat, Value, HC_mmh:AvgDepth1S)
               go.l$Stat <- as.factor(go.l$Stat)
-              levels(go.l$Stat) <- c("Avg. Depth Strike 1 (cm)", "Avg. % Soil Moisture", "Infiltration (mm/h)", "Soil % Clay")
-              go.l$Stat <- factor(go.l$Stat, levels =c( "Infiltration (mm/h)", "Avg. Depth Strike 3 (cm)", "Avg. % Soil Moisture", "Soil % Clay"))
-              levels(go.l$Stat) <- c( "Infiltration (mm/h)", "Depth after 1 Strikes (cm)", "Avg. % Soil Moisture", "% Clay")
+              levels(go.l$Stat) <- c("Penentration Depth (cm)", "Avg. % Soil Moisture", "Infiltration (mm/h)", "Soil % Clay")
+              go.l$Stat <- factor(go.l$Stat, levels =c( "Infiltration (mm/h)", "Penentration Depth (cm)", "Avg. % Soil Moisture", "Soil % Clay"))
+              levels(go.l$Stat) <- c( "Infiltration (mm/h)", "Penentration Depth (cm)", "Avg. % Soil Moisture", "% Clay")
               go.l$Component <- factor(go.l$Component, levels = c("Mound", "Pediment", "Matrix"))
 
-              ggplot(data=go.l,  aes(x=psandMatrix, y=Value, color=Component)) + geom_point()+ scale_color_manual(values=c("green","red", "blue"))+
-                facet_grid(Stat~Vegetation, scales="free")+(geom_smooth(method=lm))+labs(color = "r", x = "% Sand Matrix Soil")+
+              ggplot(data=go.l,  aes(x=psandMatrix, y=Value, color=Component)) + geom_point()+ scale_color_manual(values=c("black","orange", "green"))+
+                facet_grid(Stat~Vegetation, scales="free")+(geom_smooth(method=lm))+labs(color = "r", x = "Topsoil Texture: % Sand")+
                 theme_bw()+ theme(text = element_text(size = 20), axis.title.y = element_blank(), legend.position = "top")
